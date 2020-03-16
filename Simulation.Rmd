@@ -1,0 +1,111 @@
+---
+title: "Model Simulation"
+output: html_notebook
+---
+This file is used to run the simulations over our different models in order to estimate the efficency of matching methods.
+The matching methods used are:
+  * No matching (Benchmark)
+  * Coarsened Exact Matching
+  * Propensity Matching with Logistic Regression
+  * Propensity Matching with Random Forest
+  * Cardinality Matching with threshold 0.1
+  * Cardinality Matching with threshold 0.01
+
+
+```{r,, echo=FALSE}
+#X11 library is missing: install XQuartz from xquartz.macosforge.org
+#install.packages("cem")
+
+library(MASS) #Causal inference
+library(Matching) #Causal inference
+library(MatchIt) # Causal inference
+library(cem) # Coarsened Exact Matching
+library(designmatch) #Cardinality Matching
+library(randomForest) #Random Forest for propensity score
+library(norm) #Norm computation
+
+library(mice) #Data imputation
+library(VIM) #Data imputation
+library(missMDA) #Data imputation
+library(Amelia) #Data imputation
+
+library(ggplot2) #Visualisation
+library(scales) #Visualisation
+library(grid) #Visualisation
+library(RColorBrewer) #Visualisation
+
+source("amputation.R") #To generate missing values
+source("plotFunctions.R") #Annex functions used for plotting
+source("DataGeneration.R") #To generate dataframe following diven models
+source("matchingFunctions.R") #The different matching functions used
+source("globalSimulation.R") #To run simulation to compare matching methods
+source("missingValSimulation.R") #To run simulation with missing values generated and imputed
+```
+
+  
+```{r, echo=FALSE}
+
+#We choose here the number of simulation to run (200 simulations ~ 1h)
+
+nombre_simu <- 500
+
+#Uncomment the wanted scenario
+
+#data_scenario_1 <- global_simulation(dataset_1,f_1,nombre_simu)
+#data_scenario_2 <- global_simulation(dataset_1,f_2,nombre_simu)
+#data_scenario_3 <- global_simulation(dataset_1,f_3,nombre_simu)
+
+#data_scenario_4 <- global_simulation(dataset_2,f_1,nombre_simu)
+#data_scenario_5 <- global_simulation(dataset_2,f_2,nombre_simu)
+#data_scenario_6 <- global_simulation(dataset_2,f_3,nombre_simu)
+
+#data_scenario_7 <- global_simulation(dataset_3,f_1,nombre_simu)
+#data_scenario_8 <- global_simulation(dataset_3,f_2,nombre_simu)
+#data_scenario_9 <- global_simulation(dataset_3,f_3,nombre_simu)
+
+# To save the scenario to a file
+#saveRDS(data_scenario_1, file = "data_scenario_1.rds")
+
+#  to Restore the object readRDS(file = "my_data.rds")
+```
+
+
+The cell bellow is for similar simulation with missing values generated and imputed in order to assess the robustness of matching methods. 
+
+```{r, echo=FALSE}
+
+#We choose here the number of simulation to run (200 simulations ~ 1h30)
+
+nombre_simu_NA <- 500
+
+#Uncomment the wanted scenario
+
+#data_scenario_NA_1 <- global_simulation_with_NA(dataset_1,f_1,nombre_simu_NA,"MAR","Amelia")
+#data_scenario_NA_2 <- global_simulation_with_NA(dataset_1,f_2,nombre_simu_NA,"MAR","Amelia")
+#data_scenario_NA_3 <- global_simulation_with_NA(dataset_1,f_3,nombre_simu_NA,"MAR","Amelia")
+
+#data_scenario_NA_4 <- global_simulation_with_NA(dataset_2,f_1,nombre_simu_NA,"MAR","Amelia")
+#data_scenario_NA_5 <- global_simulation_with_NA(dataset_2,f_2,nombre_simu_NA,"MAR","Amelia")
+#data_scenario_NA_6 <- global_simulation_with_NA(dataset_2,f_3,nombre_simu_NA,"MAR","Amelia")
+
+#data_scenario_NA_7 <- global_simulation_with_NA(dataset_3,f_1,nombre_simu_NA,"MAR","Amelia")
+#data_scenario_NA_8 <- global_simulation_with_NA(dataset_3,f_2,nombre_simu_NA,"MAR","Amelia")
+#data_scenario_NA_9 <- global_simulation_with_NA(dataset_3,f_3,nombre_simu_NA,"MAR","Amelia")
+
+# To save the scenario to a file
+#saveRDS(data_scenario_NA_1, file = "data_scenario__NA_1.rds")
+```
+
+We then plot the estimated ATT and the difference in means for each method in order to compare them.
+We can also have access to all the results (KS, ratio_var, estimated ATT in order to analyse them)
+
+```{r}
+#Balance plotting
+#balance_ploting(data_scenario_1)
+
+#ATT plotting
+#att_ploting(data_scenario_1)
+
+```
+
+
