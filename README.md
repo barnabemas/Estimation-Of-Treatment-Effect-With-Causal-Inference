@@ -1,5 +1,5 @@
 # Estimation-Of-Treatment-Effect-With-Causal-Inference
-Estimation of a treatment effect on head trauma patients with matching methods for Paris Hospital (AP-HP). We used coarsened exact matching, propensity matching (logistic regression, random forest, backward AIC) and cardinality matching on the Traumabase a raw dataset (10k × 50). We also tested the robustness of our method toward missing value completion and FAMD which were two techniques we used to preprocess the data 
+Estimation of a treatment effect on head trauma patients with matching methods for Paris Hospital (AP-HP). We used coarsened exact matching, propensity matching (logistic regression, random forest, backward AIC) and cardinality matching on the Traumabase raw dataset (10k × 50). We also tested the robustness of our method towards missing value completion and FAMD which were two techniques we used to preprocess the data.
 
 Here is the code we used for our project:
 
